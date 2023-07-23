@@ -103,3 +103,11 @@ body {
     font-size: 1.6rem;
     color: #3C4048;
   }
+
+.wicon.clear {
+    background-image: url("/assets/images/weather-icons-master/animation-ready/clear-day.svg");
+}
+
+.wicon.light_rain {
+    background-image: url("/assets/images/weather-icons-master/animation-ready/light-rain.svg");
+}

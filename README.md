@@ -56,11 +56,13 @@ To set up the Weather Project locally on your machine, follow these steps:
 4. Type the name of a city or location and press Enter or click the search button.
 5. The weather details for the specified location will be displayed below the search bar.
 
-## Design file
-[Meteocon - Animated Weather Icons] (https://github.com/basmilius/meteocons) by Bas Milius
-## Resources used
 
+## Resources used
 Special thanks to Bas Milius for providing free animated SVG weather icons. Support his work by visiting his [Github](https://github.com/basmilius) repository.
+
+[Meteocon - Animated Weather Icons](https://github.com/basmilius/meteocons) by Bas Milius
+
+[Google Fonts - Arimo](https://fonts.google.com/specimen/Arimo) by Steve Matteson
 
 
 ## License

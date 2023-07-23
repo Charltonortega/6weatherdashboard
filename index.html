@@ -13,7 +13,7 @@
     <h1 class="text"> Weather Dashboard </h1>
     <div class="search text text-center mt-5 flex-column justify-content-center align-items-center">
         <input id=search type="text" placeholder ="Enter City Name">
-        <button><img src="./assets/images/"></button>
+        <button><img src="./assets/images/search.png"></button>
 
 <!-- Weather Card Container -->
 <div class="container mt-5">
@@ -22,33 +22,42 @@
             <!-- Temp Display -->
             <div class="d-flex flex-row justify-content-center align-items-center">
                 <div class="p-3">
-                    <h2 id="temp-display">0&deg;</h2>
+                    <h2 id="temperature-display">0&deg;</h2>
                 </div>
                 <!-- Weather Description -->
                 <div class="p-3">
-                    <img id="wicon" src="https://placehold.co/400"> 
+                    <img id="wicon" src="./assets/images/weather-icons-master/animation-ready/clear-day.svg"> 
                 </div>
-                <!-- Locat ion name, date, time and descriptive weather-->
+                <!-- Location name, date, time and descriptive weather-->
                 <div class="p-3">
-                    <h5 id="date-display">Current Date & Time</h5>
+                    <h4> The time is..</h4>
+                    <h5 id="time-display">Current Time</h5>
                     <h3 id="city-display">City Name</h3> 
-                    <span class="weather__description">Weather Description</span>
+                    <span id="description-display">Weather Description</span>
                 </div>
 
             </div>
                 <!-- Additional weather information -->
-            <div class="weather__status d-flex flex-row justify-content-center align-items-center mt-3">
-                <div class="p-4 d-flex justify-content-center align-items-center">
-                <!-- Humidity Display in %  -->
-                    <img src="https://placehold.co/400">
-                    <span id="humidity-display">-</span>
+                <div class="container">
+                    <div class="weather__status d-flex flex-row justify-content-center align-items-center mt-3">
+                        <div class="p-4 d-flex justify-content-center align-items-center">
+                            <!-- Humidity Display in %  -->
+                            <img src="./assets/images/weather-icons-master/animation-ready/humidity.svg">
+                            <span id="humidity-display">-</span>
+                        </div>
+                        <!-- Wind Display in km/h -->
+                        <div class="p-4 d-flex justify-content-center align-items-center">
+                            <img src="./assets/images/weather-icons-master/animation-ready/wind.svg">
+                            <span id="wind-display">-</span> 
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-12 text-center">
+                            <h5 id="date-display">Current Date</h5>
+                        </div>
+                    </div>
                 </div>
-                <!-- Wind Display in km/h -->
-                <div class="p-4 d-flex justify-content-center align-items-center">
-                    <img src="https://placehold.co/400">
-                    <span id="wind-display">-</span> 
-                </div> 
-            </div>
+            
         </div>
     </div>
 </div>

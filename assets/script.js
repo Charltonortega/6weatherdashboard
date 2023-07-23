@@ -27,29 +27,42 @@ function getForecastData(cityName) {
     });
 }
 
+// Function to get current time
+function getCurrentTime() {
+    var currentDate = new Date();
+    var time = currentDate.toLocaleTimeString();
+    return time;
+}
+
+// Function to get current day
+function getCurrentDay() {
+    var currentDate = new Date();
+    var day = currentDate.toLocaleDateString();
+    return day;
+}
+
 // Function to display current weather data
 function displayCurrentWeather(data) {
     // Find the elements in the HTML where we want to display data
-    var temperatureElement = $(".weather__card h2");
-    var cityNameElement = $(".weather__card h3");
-    var dateElement = $(".weather__card h5");
-    var descriptionElement = $(".weather__card .weather__description");
+    var temperatureElement = $("#temperature-display");
+    var cityNameElement = $("#city-display");
+    var dateElement = $("#date-display");
+    var timeElement = $("#time-display");
+    var descriptionElement = $("#description-display");
 
     // Get the data we want to display
-    var temperature = `${Math.round(data.main.temp)}°`; // current temperature
+    var temperature = `${Math.round(data.main.temp)}°`; // round of nearest number 
     var cityName = data.name; // city name
-    var date = new Date().toLocaleString(); // current date and time
     var description = data.weather[0].main; // weather description
 
     // Update the HTML elements with the new data
     temperatureElement.text(temperature);
     cityNameElement.text(cityName);
-    dateElement.text(date);
     descriptionElement.text(description);
 
     // Repeat the same steps for humidity, sun-set time, and wind speed
-    var humidityElement = $(".weather__status span").eq(0);
-    var windSpeedElement = $(".weather__status span").eq(1);
+    var humidityElement = $("#humidity-display");
+    var windSpeedElement = $("#wind-display");
 
     var humidity = `${data.main.humidity}%`;
     var windSpeed = `${data.wind.speed} km/h`;
@@ -57,14 +70,14 @@ function displayCurrentWeather(data) {
     humidityElement.text(humidity); // Update the humidity
     windSpeedElement.text(windSpeed); // Update the wind speed
 
-     // Update the date and time every second
-     setInterval(function() {
-        var date = new Date().toLocaleString(); // current date and time
+    // Update the date and time every second
+    setInterval(function() {
+        var date = getCurrentDay(); // current date
+        var time = getCurrentTime(); // current time
         dateElement.text(date);
+        timeElement.text(time);
     }, 1000); // 1000 ms = 1 second
 }
-
-// fix the search button to work on press enter ???***
 
 // Function to handle the click event on the search button
 $("button").click(function() {

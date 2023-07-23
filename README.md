@@ -29,7 +29,7 @@ The Weather Project aims to provide real-time weather information to users based
                                                     **ADD GIF HERE CHARLTON**
 
 ## Deployment
-The URL of the deployed application:                        **psdisa;lkdsa;oldsa edit next**
+The URL of the deployed application:                                **psdisa;lkdsa;oldsa edit next**
 
 The URL of the GitHub repository: https://github.com/Charltonortega/weather-dashboard
 

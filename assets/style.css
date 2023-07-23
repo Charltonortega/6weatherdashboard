@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'Arimo'; 
+  src: url(./fonts/Arimo/Arimo-VariableFont_wght.ttf); 
+  src: url(./fonts/Arimo/Arimo-Italic-VariableFont_wght.ttf);
+  src: url(./fonts/Arimo/Arimo-Medium.ttf);
+  src: url(./fonts/Arimo/Arimo-SemiBold.ttf);
+  src: url(./fonts/Arimo/Arimo-Bold.ttf);
+  src: url(./fonts/Arimo/Arimo-Italic.ttf);
+  src: url(./fonts/Arimo/Arimo-MediumItalic.ttf);
+  src: url(./fonts/Arimo/Arimo-SemiBoldItalic.ttf);
+  src: url(./fonts/Arimo/Arimo-BoldItalic.ttf);
+
+}
+
+body {
+    background: #fff;
+    color: #444;
+    font-family: "Arimo", sans-serif;
+ 
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 15px 0;
+    padding: 0;
+    font-family: "Arimo", sans-serif;
+    font-weight:700;
+  }
+  .search {
+    width: 100%;
+    display: table-row;
+    align-items:center;
+    justify-content: space-between;
+}
+.search input{ 
+    border: 0;
+    outline: 0;
+    background: #EEEEEE;
+    color: #555;
+    padding: 10px 25px;
+    height: 70px;
+    border-radius:70px;
+    flex: 1;
+    margin-right:16px;
+    font-size: 18px;
+}
+.search button {
+    border: 0;
+    outline: 0;
+    background: #EEEEEE;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+
+}
+  .weather__card {
+    width: 800px;
+    padding: 40px 30px;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    color:#3C4048;
+  }
+  .weather__card h2 {
+    font-size:120px;
+    font-weight:700;
+    color:#3C4048;
+    line-height: .8;
+  }
+  .weather__card h3 {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: .8;
+    color:#3C4048;
+  }
+  .weather__card h5 {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: .1;
+    color:#9D9D9D;
+  }
+  .weather__card img {
+    width: 120px;
+    height: 120px;
+  }
+  .weather__card .weather__description {
+    border-radius: 25px;
+    padding: 5px 15px;
+    border:0;
+    outline: none;
+    color:#7F8487;
+    font-size: 1em;
+    font-weight: 400;
+    background-color: #fff;
+  }
+
+  .weather__status img {
+    height: 20px;
+    width: 20px;
+    vertical-align:middle;
+  }
+  .weather__status span {
+    padding-left: .5rem;
+    font-weight: 600;
+    font-size: .8rem;
+    color: #3C4048;
+  }
+ 

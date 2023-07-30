@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="./assets/style.css">
             <title>Weather Dashboard</title>
@@ -13,8 +14,13 @@
     <div class="mt-5 container d-flex flex-column justify-content-center align-items-center">
     <h1 class="text"> Weather Dashboard </h1>
     <div class="search text text-center mt-5 flex-column justify-content-center align-items-center">
-        <input id=search type="text" placeholder ="Enter City Name">
+        <input id="search" type="text" placeholder ="Enter City Name">
         <button><img src="./assets/images/search.png"></button>
+
+        <div id="search-history-container">
+            <h2>Search History</h2>
+            <ul id="search-history"></ul>
+        </div>
 
 <!-- Weather Card Container -->
 <div class="container mt-5">
@@ -32,10 +38,12 @@
                 </div>
                 <!-- Location name, date, time and descriptive weather-->
                 <div class="p-3">
-                    <h4> The local time is..</h4>
-                    <h5 id="time-display">Current Time</h5>
-                    <p class="text-center">in</p>
-                    <h3 id="city-display">City Name</h3> 
+                    <h5> The local time in..</h5> 
+                    <h3 id="city-display">City Name</h3>
+                     <p class="text-center">is</p>
+                    <h4 id="time-display">Current Time</h4>
+                    
+                   
                 </div>
 
             </div>
@@ -53,6 +61,7 @@
                             <span id="wind-display">-</span> 
                         </div>
                     </div>
+                                <!-- Current date for chosen city -->
                     <div class="row justify-content-center mt-3">
                         <div class="col-12 text-center">
                             <h5 id="date-display">Current Date</h5>
@@ -64,13 +73,25 @@
     </div>
 </div>
 
+</div> 
+
+<!-- 5-Day Forecast Container -->
+<div class="container mt-5">
+    <div id="forecast-container" class="d-flex justify-content-between">
+        <!-- Forecast cards will be added dynamically here -->
+    </div>
 </div>
-</body>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- <script src="./assets/script.js"></script> -->
     <script src="./assets/script.js"></script>
+</body>
+   
 <footer>
-    <h2> made by charlton </h2>
+    <h2> Made by Charlton </h2>
 </footer>
 
 </html>

@@ -22,12 +22,15 @@ body {
     align-items:center;
     justify-content: space-between;
 }
+#search::placeholder {
+  text-align: center;
+}
 .search input{ 
     border: 0;
     outline: 0;
     background: #EEEEEE;
     color: #555;
-    padding: 10px 25px;
+    padding: 5px 240px;
     height: 70px;
     border-radius:70px;
     flex: 1;

@@ -1,54 +1,33 @@
-var apiKey = "ef7310166a264ebe187d6c3c4405695e"; 
-var apiUrl ="https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+var apiKey = "ef7310166a264ebe187d6c3c4405695e";
+var apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
 
-// Fetch the JSON file (replace the URL with the actual path to the file)
-$.getJSON('./assets/city.list.min.json', function(data) {
-    // Create an array of strings for the autocomplete suggestions
-    var availableCities = data.map(city => `${city.name}, ${city.country}`);
+var availableCities = []; // Declare availableCities at a higher scope
 
+$.getJSON('./assets/city.list.min.json', function (data) {
+    // Assign the array of strings for the autocomplete suggestions
+    availableCities = data.map(city => `${city.name}, ${city.country}`);
     // Initialize the autocomplete functionality
     $("#search").autocomplete({
         source: availableCities
     });
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
+    // Set "Adelaide" as the default city
+    getWeatherData("Adelaide");
+    getForecastData("Adelaide");
 
-// When the form is submitted...
-$("#search-form").on("submit", function(event) {
-    event.preventDefault();
+    // Button click event
+    $("button").click(function () {
+        processCitySearch();
+    });
 
-    // Get the city name from the input field
-    var cityName = $("#search").val(); // Change the id to "search"
-
-    // Save the city name to localStorage and add it to the search history list
-    saveCity(cityName);
-
-    // Fetch and display the weather data and forecast for the city
-    getWeatherData(cityName);
-    getForecastData(cityName);
-});
-
-// Load the search history when the page loads
-var cities = getSavedCities();
-cities.forEach(function(cityName) {
-    // Create a new list item for the city
-    var li = $("<li></li>").text(cityName);
-    li.addClass("search-item");  // add a class for styling and event handling
-
-    // Append the list item to the search history list
-    $("#search-history").append(li);
-});
-
-// Add event listener for clicks on the search history list
-$("#search-history").on("click", ".search-item", function() {
-    var cityName = $(this).text();
-
-    // Fetch and display the weather data and forecast for cityName
-    getWeatherData(cityName);
-    getForecastData(cityName);
-});
-
+    // Enter key event
+    $("#search").keypress(function (e) {
+        if (e.which === 13) { // 13 is the key code for Enter key
+            processCitySearch();
+        }
+    });
 });
 
 // Function to fetch current weather data for a given city
@@ -80,7 +59,7 @@ function displayCurrentWeather(data) {
     
     // Update the HTML elements with the new data
     $("#temperature-display").text(`${Math.round(data.main.temp)}°`);
-    $("#city-display").text(data.name);
+    $("#description-display").text(description);
     $("#city-display").text(`${data.name}, ${countryCode}`);
     $("#humidity-display").text(`${data.main.humidity}%`);
     $("#wind-display").text(`${data.wind.speed} km/h`);
@@ -108,29 +87,11 @@ function displayCurrentWeather(data) {
     }, 1000); 
 }
 
-$(document).ready(function() {
-    // Set "Adelaide" as the default city
-    getWeatherData("Adelaide");
-    getForecastData("Adelaide");
-
-    // Button click event
-    $("button").click(function() {
-        processCitySearch();
-    });
-    
-    // Enter key event
-    $("#search").keypress(function(e) {
-        if (e.which === 13) { // 13 is the key code for Enter key
-            processCitySearch();
-        }
-    });
-});;
-
 function processCitySearch() {
     var city = $("#search").val().trim();
     if (city !== "" && availableCities.includes(city)) { // check if city is in the availableCities array
         getWeatherData(city);
-        getForecastData(city); // add this line
+        getForecastData(city);
     } else {
         alert("Please enter a valid city from the available cities.");
     }
@@ -146,7 +107,6 @@ function getForecastData(cityName) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
-            console.log(data.length)
         })
         .then(function(data) {
             displayForecast(data.list);  // pass the forecast data list to the displayForecast function
@@ -163,7 +123,7 @@ function displayForecast(data) {
     var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     // Loop over the data and add a card for each day
-    for (var i = 8; i < data.length; i += 7) {
+    for (var i = 1; i < data.length; i += 8) {
         // Get the date of the forecast
         var forecastDate = new Date(data[i].dt * 1000);
 
@@ -196,3 +156,15 @@ function displayForecast(data) {
         $("#forecast-container").append(cardHtml);
     }
 }
+
+// Button click event
+$("button").click(function() {
+    processCitySearch();
+});
+
+// Enter key event
+$("#search").keypress(function(e) {
+    if (e.which === 13) { // 13 is the key code for Enter key
+        processCitySearch();
+    }
+});

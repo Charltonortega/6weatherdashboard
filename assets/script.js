@@ -1,35 +1,24 @@
 var apiKey = "ef7310166a264ebe187d6c3c4405695e";
 var apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
 
-var availableCities = []; // Declare availableCities at a higher scope
-
 $.getJSON('./assets/city.list.min.json', function (data) {
-    // Assign the array of strings for the autocomplete suggestions
     availableCities = data.map(city => `${city.name}, ${city.country}`);
-    // Initialize the autocomplete functionality
     $("#search").autocomplete({
         source: availableCities
     });
 });
 
-$(document).ready(function () {
-    // Set "Adelaide" as the default city
-    getWeatherData("Adelaide");
-    getForecastData("Adelaide");
-
-    // Button click event
-    $("button").click(function () {
-        processCitySearch();
-    });
-
-    // Enter key event
-    $("#search").keypress(function (e) {
-        if (e.which === 13) { // 13 is the key code for Enter key
-            processCitySearch();
-        }
-    });
-});
-
+// Function to process the city search
+function processCitySearch() {
+    var city = $("#search").val().trim();
+    if (availableCities.includes(city)) {
+        getWeatherData(city);
+        getForecastData(city);
+    } else {
+        alert("City not found. Please select a city from the list.");
+    }
+}
+  
 // Function to fetch current weather data for a given city
 function getWeatherData(cityName) { 
     var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
@@ -48,7 +37,7 @@ function getWeatherData(cityName) {
 }
 
 // Function to display current weather data
-// Declare a variable for interval outside the function
+
 var timeInterval;
 
 function displayCurrentWeather(data) {
@@ -87,15 +76,6 @@ function displayCurrentWeather(data) {
     }, 1000); 
 }
 
-function processCitySearch() {
-    var city = $("#search").val().trim();
-    if (city !== "" && availableCities.includes(city)) { // check if city is in the availableCities array
-        getWeatherData(city);
-        getForecastData(city);
-    } else {
-        alert("Please enter a valid city from the available cities.");
-    }
-}
 function getForecastData(cityName) {
     var apiKey = "ef7310166a264ebe187d6c3c4405695e";  
     var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${cityName}&appid=${apiKey}`;
@@ -110,6 +90,7 @@ function getForecastData(cityName) {
         })
         .then(function(data) {
             displayForecast(data.list);  // pass the forecast data list to the displayForecast function
+            console.log(data)
         })
         .catch(function(error) {
             console.log('There has been a problem with your fetch operation: ', error.message);
@@ -123,36 +104,35 @@ function displayForecast(data) {
     var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     // Loop over the data and add a card for each day
-    for (var i = 1; i < data.length; i += 8) {
+    for (var i = 1; i < data.length; i += 8) { // "8" will display 5 cards for the forecast.
         // Get the date of the forecast
         var forecastDate = new Date(data[i].dt * 1000);
 
         // Get the day of the week
-        var dayOfWeek = daysOfWeek[forecastDate.getDay()];
-
+        var dayOfWeek = daysOfWeek[forecastDate.getDay()]; 
         var iconPath = `./assets/images/weather-icons-master/animation-ready/${data[i].weather[0].main.toLowerCase()}.svg`;
         var cardHtml = `
-<div class="forecast-card">
-    <div class="card text-center">
-        <div class="card-body">
-            <h5 class="card-title">${dayOfWeek}</h5> <!-- Display the day of the week -->
-            <img src="${iconPath}">
-            <p class="card-text forecast-description">${data[i].weather[0].description}</p>
-            <p class="card-text">${Math.round(data[i].main.temp)}°</p>
-            <div class="d-flex justify-content-around">
-                <p class="card-text">
-                    <img src='./assets/images/weather-icons-master/animation-ready/raindrops.svg' alt='Humidity Icon'>
-                    ${data[i].main.humidity}%
-                </p>
-                <p class="card-text">
-                    <img src='./assets/images/weather-icons-master/animation-ready/wind.svg' alt='Wind Icon'>
-                    ${data[i].wind.speed} km/h
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-`;
+                        <div class="forecast-card">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">${dayOfWeek}</h5> <!-- Display the day of the week -->
+                                    <img src="${iconPath}">
+                                    <p class="card-text forecast-description">${data[i].weather[0].description}</p>
+                                    <p class="card-text">${Math.round(data[i].main.temp)}°</p>
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card-text">
+                                            <img src='./assets/images/weather-icons-master/animation-ready/raindrops.svg' alt='Humidity Icon'>
+                                            ${data[i].main.humidity}%
+                                        </p>
+                                        <p class="card-text">
+                                            <img src='./assets/images/weather-icons-master/animation-ready/wind.svg' alt='Wind Icon'>
+                                            ${data[i].wind.speed} km/h
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
         $("#forecast-container").append(cardHtml);
     }
 }
@@ -167,4 +147,15 @@ $("#search").keypress(function(e) {
     if (e.which === 13) { // 13 is the key code for Enter key
         processCitySearch();
     }
+});
+
+$(document).ready(function () {
+    // Set "Adelaide" as the default city
+    getWeatherData("Adelaide");
+    getForecastData("Adelaide");
+
+    // Button click event for specific search button
+    $("#search-button").click(function () {
+        processCitySearch();
+    });
 });

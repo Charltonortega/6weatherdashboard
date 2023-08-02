@@ -45,7 +45,25 @@ body {
     width: 70px;
     height: 70px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.search button:hover {
+      transform: scale(1.1); /* Scale the button up slightly on hover */
+  }
+    
+.card.search-history-card {
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    padding: 20px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for search history card */
+.card.search-history-card:hover {
+    background-color: #e6e6e6;
 }
   .weather__card {
     width: 800px;
@@ -197,15 +215,4 @@ body {
   width: 100px;  /* adjust as needed */
   height: 100px; /* adjust as needed */
   vertical-align: middle;
-}
-
-/* Define the CSS transitions for the "fade" class */
-.fade {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-/* Add the "show" class to make the element visible */
-.show {
-  opacity: 1;
 }

@@ -1,6 +1,19 @@
 var apiKey = "ef7310166a264ebe187d6c3c4405695e";
 var apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
 
+function getWeatherData(cityName) {
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+
+    $.ajax({
+        url: apiUrl,
+        method: "GET"
+    })
+    .done(function(response) {
+        // Call the displayCurrentWeather function with the fetched data
+        displayCurrentWeather(response);
+    });
+}
+
 $.getJSON('./assets/city.list.min.json', function (data) {
     availableCities = data.map(city => `${city.name}, ${city.country}`);
     $("#search").autocomplete({
@@ -8,33 +21,49 @@ $.getJSON('./assets/city.list.min.json', function (data) {
     });
 });
 
+// Initialize searchHistory array from localStorage or as an empty array
+var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
 // Function to process the city search
 function processCitySearch() {
     var city = $("#search").val().trim();
     if (availableCities.includes(city)) {
+        // Add the city to the searchHistory array
+        searchHistory.unshift(city);
+        // Limit the search history to 5 entries (optional)
+        if (searchHistory.length > 5) searchHistory.pop();
+        // Save the updated searchHistory array to localStorage
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+        // Fetch and display weather data for the city
         getWeatherData(city);
         getForecastData(city);
+        // Update the display of search history cards (function to be implemented)
+        displaySearchHistoryCards();
     } else {
         alert("City not found. Please select a city from the list.");
     }
 }
-  
-// Function to fetch current weather data for a given city
-function getWeatherData(cityName) { 
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
-    $.ajax({
-        url: apiUrl,
-        method: "GET" 
-    })
-    .done(function(response) {
-        console.log(response.weather);
-        displayCurrentWeather(response);
-    })
-    .fail(function() {
-        console.error("Error fetching weather data. Check if the city name is correct.");
+// Function to display search history cards
+function displaySearchHistoryCards() {
+    // Clear the existing search history cards
+    $("#search-history-cards").empty();
+    // Iterate through the searchHistory array and create cards for each city
+    searchHistory.forEach(function (city) {
+        // Create a card element for the city
+        var card = $('<div class="card search-history-card">').text(city);
+        // Append the card to the designated container in the HTML
+        $("#search-history-cards").append(card);
     });
 }
+
+// Click event for search history cards
+$(document).on("click", ".card", function () {
+    var city = $(this).text();
+    // Fetch and display weather data for the clicked city
+    getWeatherData(city);
+    getForecastData(city);
+});
 
 // Function to display current weather data
 
@@ -147,6 +176,14 @@ $("#search").keypress(function(e) {
     if (e.which === 13) { // 13 is the key code for Enter key
         processCitySearch();
     }
+});
+
+// Click event for search history cards
+$(document).on("click", ".card", function () {
+    var city = $(this).text();
+    // Fetch and display weather data for the clicked city
+    getWeatherData(city);
+    getForecastData(city);
 });
 
 $(document).ready(function () {

@@ -1,12 +1,12 @@
-var apiKey = "ef7310166a264ebe187d6c3c4405695e";
-var apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+var apiKey = "ef7310166a264ebe187d6c3c4405695e"; // API Key
+var apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q="; // API URL
 
-function getWeatherData(cityName) {
+function getWeatherData(cityName) { // Function to get weather data for a city
     var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
-    $.ajax({
-        url: apiUrl,
-        method: "GET"
+    $.ajax({ 
+        url: apiUrl, 
+        method: "GET" // use GET method
     })
     .done(function(response) {
         // Call the displayCurrentWeather function with the fetched data
@@ -14,7 +14,7 @@ function getWeatherData(cityName) {
     });
 }
 
-$.getJSON('./assets/city.list.min.json', function (data) {
+$.getJSON('./assets/city.list.min.json', function (data) { // Get the list of cities from JSON, downloaded bulk city list from openweathermaps
     availableCities = data.map(city => `${city.name}, ${city.country}`);
     $("#search").autocomplete({
         source: availableCities
@@ -30,14 +30,15 @@ function processCitySearch() {
     if (availableCities.includes(city)) {
         // Add the city to the searchHistory array
         searchHistory.unshift(city);
-        // Limit the search history to 5 entries (optional)
+        // Limit the search history to 5 entries
         if (searchHistory.length > 5) searchHistory.pop();
         // Save the updated searchHistory array to localStorage
         localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
         // Fetch and display weather data for the city
         getWeatherData(city);
         getForecastData(city);
-        // Update the display of search history cards (function to be implemented)
+        console.log("Fetching weather and forecast data here....")
+        // Update the display of search history cards
         displaySearchHistoryCards();
     } else {
         alert("City not found. Please select a city from the list.");
@@ -66,24 +67,23 @@ $(document).on("click", ".card", function () {
 });
 
 // Function to display current weather data
-
 var timeInterval;
 
-function displayCurrentWeather(data) {
-    var countryCode = data.sys.country;
-    var description = data.weather[0].main;
+function displayCurrentWeather(data) { // Function to display current weather data
+    var countryCode = data.sys.country; // Get the country code
+    var description = data.weather[0].main; // Get the weather description
     var iconPath = `./assets/images/weather-icons-master/animation-ready/${description.toLowerCase()}.svg`;
-    $("#wicon").attr("src", iconPath);
+    $("#wicon").attr("src", iconPath); // Set the weather icon, dynamically changes according to weather description
     
     // Update the HTML elements with the new data
-    $("#temperature-display").text(`${Math.round(data.main.temp)}°`);
-    $("#description-display").text(description);
-    $("#city-display").text(`${data.name}, ${countryCode}`);
-    $("#humidity-display").text(`${data.main.humidity}%`);
-    $("#wind-display").text(`${data.wind.speed} km/h`);
+    $("#temperature-display").text(`${Math.round(data.main.temp)}°`); // Update the temperature
+    $("#description-display").text(description); // Update the weather description
+    $("#city-display").text(`${data.name}, ${countryCode}`); // Update the city
+    $("#humidity-display").text(`${data.main.humidity}%`); // Update the humidity
+    $("#wind-display").text(`${data.wind.speed} km/h`); // Update the wind
 
     // Get the timezone offset from the data (in seconds)
-    var timezoneOffset = data.timezone;
+    var timezoneOffset = data.timezone; 
 
     // clear the existing interval
     if (timeInterval) {
@@ -93,19 +93,19 @@ function displayCurrentWeather(data) {
     // Update the date and time every second
     timeInterval = setInterval(function() {
         // Get the current date and time in UTC
-        var now_utc = new Date();
-        var utc_time_ms = now_utc.getTime() + now_utc.getTimezoneOffset() * 60 * 1000;
+        var now_utc = new Date(); // Get the UTC time
+        var utc_time_ms = now_utc.getTime() + now_utc.getTimezoneOffset() * 60 * 1000; // Get the UTC time
 
         // Calculate the local time in the city
-        var localTime = new Date(utc_time_ms + timezoneOffset * 1000);
+        var localTime = new Date(utc_time_ms + timezoneOffset * 1000); // Get the local time
 
         // Update the date and time display
-        $("#date-display").text(localTime.toLocaleDateString());
-        $("#time-display").text(localTime.toLocaleTimeString());
+        $("#date-display").text(localTime.toLocaleDateString()); // Update the date
+        $("#time-display").text(localTime.toLocaleTimeString()); // Update the time
     }, 1000); 
 }
 
-function getForecastData(cityName) {
+function getForecastData(cityName) { // Function to get forecast data
     var apiKey = "ef7310166a264ebe187d6c3c4405695e";  
     var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${cityName}&appid=${apiKey}`;
 

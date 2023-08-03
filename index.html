@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./assets/style.css">
-        <title>Weather Dashboard</title>
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
     <!-- Bootstrap components to set responsive design -->
@@ -14,7 +14,7 @@
     <h1 class="text"> Weather Dashboard </h1>
     <div class="search text text-center mt-5 flex-column justify-content-center align-items-center">
         <input id="search" type="text" placeholder ="Enter City Name">
-        <button><img src="./assets/images/search.png"></button>
+        <button><img src="./assets/images/search.png" alt="Search"></button>
     </div>   
         <div id="search-history" class = "mt-2 d-flex flex-column justify-content-center">
             <div id="search-history-cards" class="d-flex justify-content-between" ></div>
@@ -35,10 +35,10 @@
                     <span id="description-display">Weather Description</span>
                 </div>
                 <!-- Location name, date, time and descriptive weather-->
-                <div class="p-3 text-nowrap">
+                <div class="p-3 text-nowrap align text-center">
                     <h5> The local time in..</h5> 
                     <h3 id="city-display">City Name</h3>
-                     <p class="text-center">is</p>
+                    <p class="text-center">is</p>
                     <h4 id="time-display">Current Time</h4>
                 </div>
 
@@ -48,12 +48,12 @@
                     <div class="weather__status d-flex flex-row justify-content-center align-items-center mt-3">
                         <div class="p-4 d-flex justify-content-center align-items-center">
                             <!-- Humidity Display in %  -->
-                            <img src="./assets/images/weather-icons-master/animation-ready/raindrops.svg">
+                            <img src="./assets/images/weather-icons-master/animation-ready/raindrops.svg" alt = "Humidity Icon">
                             <span id="humidity-display">-</span>
                         </div>
                         <!-- Wind Display in km/h -->
                         <div class="p-4 d-flex justify-content-center align-items-center">
-                            <img src="./assets/images/weather-icons-master/animation-ready/wind.svg">
+                            <img src="./assets/images/weather-icons-master/animation-ready/wind.svg" alt = "Wind Icon">
                             <span id="wind-display">-</span> 
                         </div>
                     </div>
@@ -68,8 +68,6 @@
         </div>
     </div>
 </div>
-
-</div> 
 
 <!-- 5-Day Forecast Container -->
 <div class="container mt-3">

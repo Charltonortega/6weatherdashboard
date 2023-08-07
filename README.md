@@ -27,9 +27,10 @@ The Weather Project aims to provide real-time weather information to users based
 ## Demo
 <p align="center">
   <a href="https://charltonortega.github.io/6weatherdashboard/">
-    <img src="example.gif" alt="Example GIF" />
+    <img src="./assets/images/Weather Dashboard Demo.gif" alt="Demo GIF"/>
   </a>
 </p>
+
 ## Deployment
 The URL of the deployed application: https://charltonortega.github.io/6weatherdashboard/                           
 

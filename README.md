@@ -26,14 +26,14 @@ The Weather Project aims to provide real-time weather information to users based
 
 ## Demo
 <p align="center">
-  <img src="./assets/images/Weather Dashboard Demo.gif" alt="Demo GIF"/>
+  <a href="https://charltonortega.github.io/6weatherdashboard/">
+    <img src="example.gif" alt="Example GIF" />
+  </a>
 </p>
-
 ## Deployment
-The URL of the deployed application:                            
+The URL of the deployed application: https://charltonortega.github.io/6weatherdashboard/                           
 
-The URL of the GitHub repository: https://github.com/Charltonortega/weather-dashboard
-
+The URL of the GitHub repository: https://github.com/Charltonortega/6weatherdashboard
 
 ## Technologies Used
 
@@ -61,7 +61,7 @@ To set up the Weather Project locally on your machine, follow these steps:
 ## Resources used
 Special thanks to Bas Milius for providing free animated SVG weather icons. Support his work by visiting his [Github](https://github.com/basmilius) repository.
 
-[Meteocon - Animated Weather Icons](https://github.com/basmilius/meteocons) by Bas Milius
+[Meteocon - Animated Weather Icons](https://github.com/basmilius/weather-icons) by Bas Milius
 
 [Google Fonts - Arimo](https://fonts.google.com/specimen/Arimo) by Steve Matteson
 

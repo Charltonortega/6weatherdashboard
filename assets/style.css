@@ -16,11 +16,23 @@ body {
     font-family: "Arimo", sans-serif;
     font-weight:700;
   }
+  #animated-header {
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
   .search {
     width: 100%;
     display: table-row;
     align-items:center;
     justify-content: space-between;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
 }
 #search::placeholder {
   text-align: center;
@@ -38,6 +50,7 @@ body {
     margin-right:16px;
     font-size: 18px;
     transition: all 0.3s ease;
+    
 }
 .search input:hover {
   transform: scale(1.050); /* Scale the button up slightly on hover */
@@ -98,6 +111,13 @@ body {
   color: #3C4048;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .weather__card:hover {
@@ -209,9 +229,11 @@ body {
   border-radius: 20px;
   color:#3C4048;
   margin: 10px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  opacity: 0;
+  animation: fadeIn 4s forwards;
+}
   .forecast-card:hover {
     transform: scale(1.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -253,4 +275,9 @@ body {
   width: 100px;  
   height: 100px; 
   vertical-align: middle;
+}
+
+footer {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
 }

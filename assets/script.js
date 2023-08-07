@@ -1,3 +1,19 @@
+var text = 'Weather Dashboard'; // The text to be animated
+var index = 0; 
+var speed = 100; 
+
+function typeWriter() {
+  if (index < text.length) {
+    document.getElementById('animated-header').innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+// Call the function when the document is ready
+document.addEventListener('DOMContentLoaded', function(event) {
+  typeWriter();
+});
 var apiKey = "ef7310166a264ebe187d6c3c4405695e"; // API Key
 var apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q="; // API URL
 

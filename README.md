@@ -25,11 +25,12 @@ The Weather Project aims to provide real-time weather information to users based
 - Responsive design for optimal viewing on various devices
 
 ## Demo
-
-                                                    **ADD GIF HERE CHARLTON**
+<p align="center">
+  <img src="./assets/images/Weather Dashboard Demo.gif" alt="Demo GIF"/>
+</p>
 
 ## Deployment
-The URL of the deployed application:                                **psdisa;lkdsa;oldsa edit next**
+The URL of the deployed application:                            
 
 The URL of the GitHub repository: https://github.com/Charltonortega/weather-dashboard
 

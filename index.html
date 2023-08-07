@@ -10,10 +10,10 @@
 </head>
 <body>
     <!-- Bootstrap components to set responsive design -->
-    <div class="mt-5 container d-flex flex-column justify-content-center align-items-center">
+    <div class="mt-5 container d-flex flex-column justify-content-center align-items-center col-sm">
     <h1 class="text"> Weather Dashboard </h1>
-    <div class="search text text-center mt-5 flex-column justify-content-center align-items-center">
-        <input id="search" type="text" placeholder ="Enter City Name">
+    <div class="search text text-center mt-1 flex-column justify-content-center align-items-center">
+        <input id="search" type="text" placeholder ="Choose a City">
         <button><img src="./assets/images/search.png" alt="Search"></button>
     </div>   
         <div id="search-history" class = "mt-2 d-flex flex-column justify-content-center">
@@ -21,7 +21,7 @@
         </div>
 
 <!-- Weather Card Container -->
-<div class="container mt-3">
+<div class="container col-sm mt-3">
     <div class="d-flex flex-row justify-content-center align-items-center">
         <div class="weather__card">
             <!-- Temp Display -->
@@ -59,7 +59,7 @@
                     </div>
                                 <!-- Current date for chosen city -->
                     <div class="row justify-content-center mt-3">
-                        <div class="col-12 text-center">
+                        <div class="col-3 text-center">
                             <h5 id="date-display">Current Date</h5>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
 </div>
 
 <!-- 5-Day Forecast Container -->
-<div class="container mt-3">
+<div class="container mt-3 row-cols-sm">
     <div id="forecast-container">
         <!-- Forecast cards will be added dynamically here -->
     </div>

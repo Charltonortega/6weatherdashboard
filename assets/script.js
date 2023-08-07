@@ -50,21 +50,30 @@ function displaySearchHistoryCards() {
     // Clear the existing search history cards
     $("#search-history-cards").empty();
     // Iterate through the searchHistory array and create cards for each city
-    searchHistory.forEach(function (city) {
+    searchHistory.forEach(function (city, index) {
         // Create a card element for the city
         var card = $('<div class="card search-history-card">').text(city);
+
+        // Create a button element for removing the card
+        var removeButton = $('<button class="remove-button">').text('x');
+        removeButton.click(function(event) {
+            // Stop the event from bubbling up to the card
+            event.stopPropagation();
+            // Remove the card from the display
+            $(this).parent().remove();
+            // Remove the city from the searchHistory array
+            searchHistory.splice(index, 1);
+            // Save the updated searchHistory array to localStorage
+            localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+        });
+
+        // Append the button to the card
+        card.prepend(removeButton);
+        
         // Append the card to the designated container in the HTML
         $("#search-history-cards").append(card);
     });
 }
-
-// Click event for search history cards
-$(document).on("click", ".card", function () {
-    var city = $(this).text();
-    // Fetch and display weather data for the clicked city
-    getWeatherData(city);
-    getForecastData(city);
-});
 
 // Function to display current weather data
 var timeInterval;
@@ -180,7 +189,12 @@ $("#search").keypress(function(e) {
 
 // Click event for search history cards
 $(document).on("click", ".card", function () {
-    var city = $(this).text();
+    // Get the city name from the card text, excluding the remove button's text
+    var city = $(this).clone()    // clone the element
+                       .children() // select all the children
+                       .remove()   // remove all the children
+                       .end()  // go back to the selected element
+                       .text();    // get the text of element
     // Fetch and display weather data for the clicked city
     getWeatherData(city);
     getForecastData(city);
